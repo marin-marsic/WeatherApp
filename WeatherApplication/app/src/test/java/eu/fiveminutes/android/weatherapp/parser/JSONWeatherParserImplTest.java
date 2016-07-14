@@ -1,6 +1,12 @@
 package eu.fiveminutes.android.weatherapp.parser;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import static org.junit.Assert.*;
+
 import org.junit.Test;
+
+import eu.fiveminutes.android.weatherapp.model.WeatherResponse;
 
 
 public class JSONWeatherParserImplTest {
@@ -42,7 +48,12 @@ public class JSONWeatherParserImplTest {
 
     @Test
     public void testGetWeather() throws Exception {
+        Gson gson = new GsonBuilder().create();
+        WeatherResponse response = gson.fromJson(JSON_DATA, WeatherResponse.class);
 
+        assertEquals("200", response.code);
+        assertEquals("Zagreb", response.city.name);
+        assertEquals("Rain", response.days.get(0).descriptionList.get(0).shortDescription);
 
     }
 }
