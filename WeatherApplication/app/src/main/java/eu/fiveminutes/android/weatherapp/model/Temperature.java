@@ -1,15 +1,27 @@
 package eu.fiveminutes.android.weatherapp.model;
 
+import com.google.gson.annotations.SerializedName;
 
 public final class Temperature {
 
-    public final int tempMin;
-    public final int tempMax;
-    public final int tempCurrent;
+    @SerializedName("min")
+    private double min;
 
-    public Temperature(final int tempMin, final int tempMax, final int tempCurrent) {
-        this.tempMin = tempMin;
-        this.tempMax = tempMax;
-        this.tempCurrent = tempCurrent;
+    @SerializedName("max")
+    private double max;
+
+    @SerializedName("day")
+    private double day;
+
+    public double getMin() {
+        return min;
+    }
+
+    public double getMax() {
+        return max;
+    }
+
+    public double getDay() {
+        return day;
     }
 }

@@ -2,10 +2,6 @@ package eu.fiveminutes.android.weatherapp.parser;
 
 import org.junit.Test;
 
-import eu.fiveminutes.android.weatherapp.model.Weather;
-
-import static org.junit.Assert.*;
-
 
 public class JSONWeatherParserImplTest {
 

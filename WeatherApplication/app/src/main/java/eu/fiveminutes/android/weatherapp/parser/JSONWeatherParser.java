@@ -1,10 +1,8 @@
 package eu.fiveminutes.android.weatherapp.parser;
 
-import org.json.JSONObject;
-
-import eu.fiveminutes.android.weatherapp.model.Weather;
+import eu.fiveminutes.android.weatherapp.model.WeatherResponse;
 
 public interface JSONWeatherParser {
 
-    public Weather getWeather(JSONObject jsonObject);
+    public WeatherResponse getWeather(String jsonObject);
 }
