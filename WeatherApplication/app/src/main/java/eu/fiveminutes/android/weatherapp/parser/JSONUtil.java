@@ -4,7 +4,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-public class JSONUtil {
+public final class JSONUtil {
 
     public static JSONObject createJsonFromString(String data) {
         JSONObject jsonObject = null;
