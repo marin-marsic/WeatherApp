@@ -105,4 +105,4 @@ public final class JSONWeatherParser {
         return new WeatherStats(humidity, pressure, windSpeed, cloudness);
     }
 
-}
+}git 
