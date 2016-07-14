@@ -1,8 +1,8 @@
-/WeatherApplication/*.iml
-/WeatherApplication/.gradle
-/WeatherApplication/local.properties
-/WeatherApplication/.idea/workspace.xml
-/WeatherApplication/.idea/libraries
-/WeatherApplication/.DS_Store
-/WeatherApplication/build
-/WeatherApplication/captures
+*.iml
+.gradle
+/local.properties
+/.idea/workspace.xml
+/.idea/libraries
+.DS_Store
+/build
+/captures
