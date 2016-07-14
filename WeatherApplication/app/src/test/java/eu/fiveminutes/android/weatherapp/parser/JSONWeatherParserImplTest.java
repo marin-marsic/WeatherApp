@@ -48,8 +48,8 @@ public class JSONWeatherParserImplTest {
 
     @Test
     public void testGetWeather() throws Exception {
-        Gson gson = new GsonBuilder().create();
-        WeatherResponse response = gson.fromJson(JSON_DATA, WeatherResponse.class);
+        JSONWeatherParser parser = new JSONWeatherParserImpl();
+        WeatherResponse response = parser.getWeather(JSON_DATA);
 
         assertEquals("200", response.code);
         assertEquals("Zagreb", response.city.name);
