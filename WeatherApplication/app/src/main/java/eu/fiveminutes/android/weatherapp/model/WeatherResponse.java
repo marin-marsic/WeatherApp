@@ -7,30 +7,21 @@ import java.util.List;
 public final class WeatherResponse {
 
     @SerializedName("city")
-    private City city;
+    public final City city;
 
     @SerializedName("cod")
-    private String code;
+    public final String code;
 
     @SerializedName("message")
-    private String message;
+    public final String message;
 
     @SerializedName("list")
-    private List<Weather> days;
+    public final List<Weather> days;
 
-    public City getCity() {
-        return city;
-    }
-
-    public String getCode() {
-        return code;
-    }
-
-    public String getMessage() {
-        return message;
-    }
-
-    public List<Weather> getDays() {
-        return days;
+    public WeatherResponse(final City city, final String code, final String message, final List<Weather> days) {
+        this.city = city;
+        this.code = code;
+        this.message = message;
+        this.days = days;
     }
 }

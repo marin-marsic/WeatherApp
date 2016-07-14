@@ -5,23 +5,17 @@ import com.google.gson.annotations.SerializedName;
 public final class Temperature {
 
     @SerializedName("min")
-    private double min;
+    public final double min;
 
     @SerializedName("max")
-    private double max;
+    public final double max;
 
     @SerializedName("day")
-    private double day;
+    public final double day;
 
-    public double getMin() {
-        return min;
-    }
-
-    public double getMax() {
-        return max;
-    }
-
-    public double getDay() {
-        return day;
+    public Temperature(final double min, final double max, final double day) {
+        this.min = min;
+        this.max = max;
+        this.day = day;
     }
 }

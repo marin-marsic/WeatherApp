@@ -6,23 +6,17 @@ import com.google.gson.annotations.SerializedName;
 public final class City {
 
     @SerializedName("id")
-    private String id;
+    public final String id;
 
     @SerializedName("name")
-    private String name;
+    public final String name;
 
     @SerializedName("country")
-    private String country;
+    public final String country;
 
-    public String getCountry() {
-        return country;
-    }
-
-    public String getId() {
-        return id;
-    }
-
-    public String getName() {
-        return name;
+    public City(final String id, final String name, final String country) {
+        this.id = id;
+        this.name = name;
+        this.country = country;
     }
 }

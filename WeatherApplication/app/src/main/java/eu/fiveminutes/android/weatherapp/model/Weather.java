@@ -7,44 +7,29 @@ import java.util.List;
 public final class Weather {
 
     @SerializedName("temp")
-    private Temperature temperature;
+    public final Temperature temperature;
 
     @SerializedName("pressure")
-    private double pressure;
+    public final double pressure;
 
     @SerializedName("humidity")
-    private double humidity;
+    public final double humidity;
 
     @SerializedName("speed")
-    private double windSpeed;
+    public final double windSpeed;
 
     @SerializedName("clouds")
-    private double clouds;
+    public final double clouds;
 
     @SerializedName("weather")
-    private List<WeatherDescription> descriptionList;
+    public final List<WeatherDescription> descriptionList;
 
-    public Temperature getTemperature() {
-        return temperature;
-    }
-
-    public double getPressure() {
-        return pressure;
-    }
-
-    public double getHumidity() {
-        return humidity;
-    }
-
-    public double getWindSpeed() {
-        return windSpeed;
-    }
-
-    public double getClouds() {
-        return clouds;
-    }
-
-    public List<WeatherDescription> getDescriptionList() {
-        return descriptionList;
+    public Weather(final Temperature temperature, final double pressure, final double humidity, final double windSpeed, final double clouds, final List<WeatherDescription> descriptionList) {
+        this.temperature = temperature;
+        this.pressure = pressure;
+        this.humidity = humidity;
+        this.windSpeed = windSpeed;
+        this.clouds = clouds;
+        this.descriptionList = descriptionList;
     }
 }

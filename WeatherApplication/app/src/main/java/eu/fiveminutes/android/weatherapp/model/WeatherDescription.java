@@ -5,30 +5,21 @@ import com.google.gson.annotations.SerializedName;
 public final class WeatherDescription {
 
     @SerializedName("id")
-    private String id;
+    public final String id;
 
     @SerializedName("main")
-    private String shortDescription;
+    public final String shortDescription;
 
     @SerializedName("description")
-    private String longDescription;
+    public final String longDescription;
 
     @SerializedName("icon")
-    private String imageIcon;
+    public final String imageIcon;
 
-    public String getId() {
-        return id;
-    }
-
-    public String getShortDescription() {
-        return shortDescription;
-    }
-
-    public String getLongDescription() {
-        return longDescription;
-    }
-
-    public String getImageIcon() {
-        return imageIcon;
+    public WeatherDescription(final String id, final String shortDescription, final String longDescription, final String imageIcon) {
+        this.id = id;
+        this.shortDescription = shortDescription;
+        this.longDescription = longDescription;
+        this.imageIcon = imageIcon;
     }
 }
