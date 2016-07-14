@@ -9,9 +9,9 @@ import eu.fiveminutes.android.weatherapp.model.WeatherResponse;
 public final class JSONWeatherParserImpl implements JSONWeatherParser {
 
     public WeatherResponse getWeather(String jsonData) {
-        Gson gson = new GsonBuilder().create();
+        final Gson gson = new GsonBuilder().create();
         try {
-            WeatherResponse response = gson.fromJson(jsonData, WeatherResponse.class);
+            final WeatherResponse response = gson.fromJson(jsonData, WeatherResponse.class);
             return response;
         } catch (JsonSyntaxException e) {
             return null;
