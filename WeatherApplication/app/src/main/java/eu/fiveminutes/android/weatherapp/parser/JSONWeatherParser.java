@@ -10,7 +10,7 @@ import eu.fiveminutes.android.weatherapp.model.Weather;
 import eu.fiveminutes.android.weatherapp.model.WeatherDescription;
 import eu.fiveminutes.android.weatherapp.model.WeatherStats;
 
-public final class JSONWeatherParser {
+public final class JSONWeatherParser implements JSONWeatherParserInterface{
 
     private static final String CITY = "city";
     private static final String CITY_ID = "id";
@@ -105,4 +105,4 @@ public final class JSONWeatherParser {
         return new WeatherStats(humidity, pressure, windSpeed, cloudness);
     }
 
-}git 
+}
