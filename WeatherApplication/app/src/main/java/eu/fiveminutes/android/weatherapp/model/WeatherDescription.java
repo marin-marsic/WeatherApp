@@ -1,17 +1,25 @@
 package eu.fiveminutes.android.weatherapp.model;
 
+import com.google.gson.annotations.SerializedName;
 
 public final class WeatherDescription {
 
-    public final String weatherID;
-    public final String longDescription;
-    public final String shortDescription;
-    public final String iconId;
+    @SerializedName("id")
+    public final String id;
 
-    public WeatherDescription(final String weatherID, final String longDescription, final String shortDescription, final String iconId) {
-        this.weatherID = weatherID;
-        this.longDescription = longDescription;
+    @SerializedName("main")
+    public final String shortDescription;
+
+    @SerializedName("description")
+    public final String longDescription;
+
+    @SerializedName("icon")
+    public final String imageIcon;
+
+    public WeatherDescription(final String id, final String shortDescription, final String longDescription, final String imageIcon) {
+        this.id = id;
         this.shortDescription = shortDescription;
-        this.iconId = iconId;
+        this.longDescription = longDescription;
+        this.imageIcon = imageIcon;
     }
 }

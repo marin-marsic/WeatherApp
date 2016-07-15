@@ -1,16 +1,35 @@
 package eu.fiveminutes.android.weatherapp.model;
 
+import com.google.gson.annotations.SerializedName;
+
+import java.util.List;
+
 public final class Weather {
 
-    public final Location location;
+    @SerializedName("temp")
     public final Temperature temperature;
-    public final WeatherStats weatherStats;
-    public final WeatherDescription weatherDescription;
 
-    public Weather(final Location location, final Temperature temperature, final WeatherStats weatherStats, final WeatherDescription weatherDescription) {
-        this.location = location;
+    @SerializedName("pressure")
+    public final double pressure;
+
+    @SerializedName("humidity")
+    public final double humidity;
+
+    @SerializedName("speed")
+    public final double windSpeed;
+
+    @SerializedName("clouds")
+    public final double clouds;
+
+    @SerializedName("weather")
+    public final List<WeatherDescription> descriptionList;
+
+    public Weather(final Temperature temperature, final double pressure, final double humidity, final double windSpeed, final double clouds, final List<WeatherDescription> descriptionList) {
         this.temperature = temperature;
-        this.weatherStats = weatherStats;
-        this.weatherDescription = weatherDescription;
+        this.pressure = pressure;
+        this.humidity = humidity;
+        this.windSpeed = windSpeed;
+        this.clouds = clouds;
+        this.descriptionList = descriptionList;
     }
 }
