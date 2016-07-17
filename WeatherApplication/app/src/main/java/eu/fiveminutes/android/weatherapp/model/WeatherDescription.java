@@ -14,12 +14,12 @@ public final class WeatherDescription {
     public final String longDescription;
 
     @SerializedName("icon")
-    public final String imageIcon;
+    public final String imageID;
 
-    public WeatherDescription(final String id, final String shortDescription, final String longDescription, final String imageIcon) {
+    public WeatherDescription(final String id, final String shortDescription, final String longDescription, final String imageID) {
         this.id = id;
         this.shortDescription = shortDescription;
         this.longDescription = longDescription;
-        this.imageIcon = imageIcon;
+        this.imageID = imageID;
     }
 }

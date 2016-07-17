@@ -37,9 +37,6 @@ public class OpenWeatherServiceImplTest {
 
             WeatherResponse weatherResponse = response.body();
             assertEquals("200", weatherResponse.code);
-            assertEquals("Zagreb", weatherResponse.city.name);
-            assertEquals("Clouds", weatherResponse.days.get(0).descriptionList.get(0).shortDescription);
-            assertEquals(16.52, weatherResponse.days.get(0).temperature.min, DELTA);
         }
     }
 }
