@@ -11,7 +11,7 @@ import retrofit2.Callback;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-public class OpenWeatherServiceImpl implements OpenWeatherService{
+public final class OpenWeatherServiceImpl implements OpenWeatherService{
 
     private static final String DATE_FORMAT = "yyyy-MM-dd'T'HH:mm:ssZ";
     private final OpenWeatherAPI openWeatherAPI;

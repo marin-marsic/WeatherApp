@@ -18,7 +18,7 @@ public class OpenWeatherServiceImplTest {
     public void testGetWeatherRetrofit() throws Exception {
 
         // test depends on network connection and changing weather
-        OpenWeatherService openWeatherService = new OpenWeatherServiceImpl();
+        final OpenWeatherService openWeatherService = new OpenWeatherServiceImpl();
         openWeatherService.getWeatherForCity("Zagreb", new CallbackImplTest());
 
         // wait for async task
@@ -35,7 +35,7 @@ public class OpenWeatherServiceImplTest {
         @Override
         public void onResponse(Call<WeatherResponse> call, Response<WeatherResponse> response) {
 
-            WeatherResponse weatherResponse = response.body();
+            final WeatherResponse weatherResponse = response.body();
             assertEquals("200", weatherResponse.code);
         }
     }
