@@ -43,8 +43,8 @@ public class DetailsArrayAdapter extends ArrayAdapter<Weather>{
         final Weather weather = days.get(position);
 
         viewHolder.city.setText(weather.descriptionList.get(0).shortDescription);
-        viewHolder.tempMin.setText(renderUtil.getTemperatureString(weather.temperature.min));
-        viewHolder.tempMax.setText(renderUtil.getTemperatureString(weather.temperature.min));
+        viewHolder.tempMin.setText(renderUtil.doubleToIntString(weather.temperature.min) + "°C");
+        viewHolder.tempMax.setText(renderUtil.doubleToIntString(weather.temperature.max) + "°C");
         Picasso.with(context)
                 .load(renderUtil.getImageURL(weather.descriptionList.get(0).imageID))
                 .into(viewHolder.imageView);
