@@ -42,8 +42,8 @@ public final class  WeatherArrayAdapter extends ArrayAdapter<WeatherResponse>{
         final WeatherResponse weatherResponse = responses.get(position);
 
         viewHolder.city.setText(weatherResponse.city.name);
-        viewHolder.tempMin.setText(renderUtil.DoubleToIntString(weatherResponse.days.get(0).temperature.min) + "°C");
-        viewHolder.tempMax.setText(renderUtil.DoubleToIntString(weatherResponse.days.get(0).temperature.max) + "°C");
+        viewHolder.tempMin.setText(renderUtil.getTemperatureString(weatherResponse.days.get(0).temperature.min));
+        viewHolder.tempMax.setText(renderUtil.getTemperatureString(weatherResponse.days.get(0).temperature.min));
         Picasso.with(context)
                 .load(renderUtil.getImageURL(weatherResponse.days.get(0).descriptionList.get(0).imageID))
                 .into(viewHolder.imageView);

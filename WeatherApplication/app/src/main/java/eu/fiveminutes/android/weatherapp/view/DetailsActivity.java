@@ -73,11 +73,11 @@ public final class DetailsActivity extends Activity {
         shortDescription.setText(today.descriptionList.get(0).shortDescription);
         longDescription.setText(today.descriptionList.get(0).longDescription);
 
-        temperature.setText("temperature: " + renderUtil.DoubleToIntString(today.temperature.day) + "°C");
-        humidity.setText("humidity: " + renderUtil.DoubleToIntString(today.humidity) + "%");
-        wind.setText("wind: " + renderUtil.DoubleToIntString(today.windSpeed) + "m/s");
-        clouds.setText("cloudness: " + renderUtil.DoubleToIntString(today.clouds) + "%");
-        pressure.setText("pressure: " + renderUtil.DoubleToIntString(today.pressure) + "hPa");
+        temperature.setText(renderUtil.getTemperatureString(today.temperature.day));
+        humidity.setText(renderUtil.getHumidityString(today.humidity));
+        wind.setText(renderUtil.getWindString(today.windSpeed));
+        clouds.setText(renderUtil.getCloudnessString(today.clouds));
+        pressure.setText(renderUtil.getPressureString(today.pressure));
 
         ArrayList<Weather> days = new ArrayList<>(weatherResponse.days);
         days.remove(TODAY);
