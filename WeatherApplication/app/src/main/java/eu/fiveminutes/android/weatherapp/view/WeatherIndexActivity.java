@@ -1,6 +1,7 @@
 package eu.fiveminutes.android.weatherapp.view;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -23,6 +24,10 @@ public final class WeatherIndexActivity extends Activity implements WeatherIndex
     private WeatherArrayAdapter weatherArrayAdapter;
     private WeatherIndexPresenter weatherIndexPresenter;
 
+    public static final String DATA = "data";
+
+    private static final int INTENT_ID = 666;
+
     @BindView(R.id.listview)
     ListView listview;
 
@@ -43,9 +48,11 @@ public final class WeatherIndexActivity extends Activity implements WeatherIndex
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 final WeatherResponse weatherResponse = (WeatherResponse) adapterView.getItemAtPosition(i);
-                Toast.makeText(getApplicationContext(),
-                        weatherResponse.city.name + " clicked!", Toast.LENGTH_LONG)
-                        .show();
+
+                final Intent intent = new Intent(WeatherIndexActivity.this, DetailsActivity.class);
+                intent.putExtra(DATA, weatherResponse);
+
+                startActivityForResult(intent, INTENT_ID);
             }
         });
 

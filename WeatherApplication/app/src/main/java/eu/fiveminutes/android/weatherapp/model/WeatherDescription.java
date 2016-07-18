@@ -2,7 +2,9 @@ package eu.fiveminutes.android.weatherapp.model;
 
 import com.google.gson.annotations.SerializedName;
 
-public final class WeatherDescription {
+import java.io.Serializable;
+
+public final class WeatherDescription  implements Serializable {
 
     @SerializedName("id")
     public final String id;

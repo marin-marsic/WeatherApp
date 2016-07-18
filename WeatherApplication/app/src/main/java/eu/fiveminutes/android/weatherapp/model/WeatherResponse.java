@@ -2,9 +2,10 @@ package eu.fiveminutes.android.weatherapp.model;
 
 import com.google.gson.annotations.SerializedName;
 
+import java.io.Serializable;
 import java.util.List;
 
-public final class WeatherResponse {
+public final class WeatherResponse  implements Serializable {
 
     @SerializedName("city")
     public final City city;

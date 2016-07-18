@@ -7,6 +7,6 @@ import retrofit2.http.Query;
 
 public interface OpenWeatherAPI {
 
-    @GET("daily?&units=metric&cnt=7")
+    @GET("daily?&units=metric&cnt=4")
     Call<WeatherResponse> load(@Query("q") String city, @Query("appid") String appid);
 }

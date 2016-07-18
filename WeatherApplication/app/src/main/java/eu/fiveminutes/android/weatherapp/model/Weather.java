@@ -2,9 +2,10 @@ package eu.fiveminutes.android.weatherapp.model;
 
 import com.google.gson.annotations.SerializedName;
 
+import java.io.Serializable;
 import java.util.List;
 
-public final class Weather {
+public final class Weather  implements Serializable {
 
     @SerializedName("temp")
     public final Temperature temperature;

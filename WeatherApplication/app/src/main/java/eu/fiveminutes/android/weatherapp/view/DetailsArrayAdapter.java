@@ -16,16 +16,17 @@ import java.util.ArrayList;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import eu.fiveminutes.android.weatherapp.R;
-import eu.fiveminutes.android.weatherapp.model.WeatherResponse;
+import eu.fiveminutes.android.weatherapp.model.Weather;
 
-public final class  WeatherArrayAdapter extends ArrayAdapter<WeatherResponse>{
+public class DetailsArrayAdapter extends ArrayAdapter<Weather>{
+
     private final Context context;
-    private final ArrayList<WeatherResponse> responses;
+    private final ArrayList<Weather> days;
 
-    public WeatherArrayAdapter(Context context, ArrayList<WeatherResponse> responses) {
-        super(context, R.layout.rowlayout, responses);
+    public DetailsArrayAdapter(Context context, ArrayList<Weather> days) {
+        super(context, R.layout.rowlayout, days);
         this.context = context;
-        this.responses = responses;
+        this.days = days;
     }
 
     @Override
@@ -39,13 +40,13 @@ public final class  WeatherArrayAdapter extends ArrayAdapter<WeatherResponse>{
 
         final DataRenderUtil renderUtil = new DataRenderUtil();
 
-        final WeatherResponse weatherResponse = responses.get(position);
+        final Weather weather = days.get(position);
 
-        viewHolder.city.setText(weatherResponse.city.name);
-        viewHolder.tempMin.setText(renderUtil.DoubleToIntString(weatherResponse.days.get(0).temperature.min) + "°C");
-        viewHolder.tempMax.setText(renderUtil.DoubleToIntString(weatherResponse.days.get(0).temperature.max) + "°C");
+        viewHolder.city.setText(weather.descriptionList.get(0).shortDescription);
+        viewHolder.tempMin.setText(renderUtil.DoubleToIntString(weather.temperature.min) + "°C");
+        viewHolder.tempMax.setText(renderUtil.DoubleToIntString(weather.temperature.max) + "°C");
         Picasso.with(context)
-                .load(renderUtil.getImageURL(weatherResponse.days.get(0).descriptionList.get(0).imageID))
+                .load(renderUtil.getImageURL(weather.descriptionList.get(0).imageID))
                 .into(viewHolder.imageView);
 
         return rowView;
