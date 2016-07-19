@@ -17,20 +17,19 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import eu.fiveminutes.android.weatherapp.R;
 import eu.fiveminutes.android.weatherapp.model.Weather;
-import eu.fiveminutes.android.weatherapp.model.WeatherResponse;
 
-public final class WeatherArrayAdapter extends ArrayAdapter<WeatherResponse>{
+public class WeatherDetailsAdapter extends ArrayAdapter<Weather>{
+
     private static final int FIRST = 0;
-    private static final int TODAY = 0;
-    private final DataRenderUtil renderUtil;
 
     private final Context context;
-    private final ArrayList<WeatherResponse> responses;
+    private final ArrayList<Weather> days;
+    private final DataRenderUtil renderUtil;
 
-    public WeatherArrayAdapter(Context context, ArrayList<WeatherResponse> responses) {
-        super(context, R.layout.rowlayout, responses);
+    public WeatherDetailsAdapter(Context context, ArrayList<Weather> days) {
+        super(context, R.layout.rowlayout, days);
         this.context = context;
-        this.responses = responses;
+        this.days = days;
         this.renderUtil = new DataRenderUtil();
     }
 
@@ -51,9 +50,9 @@ public final class WeatherArrayAdapter extends ArrayAdapter<WeatherResponse>{
             viewHolder = (ViewHolder) convertView.getTag();
         }
 
-        final WeatherResponse weatherResponse = responses.get(position);
+        final Weather weather = days.get(position);
 
-        viewHolder.fillView(weatherResponse, context, renderUtil);
+        viewHolder.fillView(weather, context, renderUtil);
 
         return convertView;
     }
@@ -76,12 +75,12 @@ public final class WeatherArrayAdapter extends ArrayAdapter<WeatherResponse>{
             ButterKnife.bind(this, view);
         }
 
-        public void fillView(final WeatherResponse weatherResponse, final Context context, final DataRenderUtil renderUtil) {
-            city.setText(weatherResponse.city.name);
-            tempMin.setText(renderUtil.getTemperatureString(weatherResponse.days.get(FIRST).temperature.min));
-            tempMax.setText(renderUtil.getTemperatureString(weatherResponse.days.get(FIRST).temperature.max));
+        public void fillView(final Weather weather, final Context context, final DataRenderUtil renderUtil) {
+            city.setText(weather.descriptionList.get(FIRST).shortDescription);
+            tempMin.setText(renderUtil.getTemperatureString(weather.temperature.min));
+            tempMax.setText(renderUtil.getTemperatureString(weather.temperature.max));
             Picasso.with(context)
-                    .load(renderUtil.getImageURL(weatherResponse.days.get(TODAY).descriptionList.get(FIRST).imageID))
+                    .load(renderUtil.getImageURL(weather.descriptionList.get(FIRST).imageID))
                     .into(imageView);
         }
     }

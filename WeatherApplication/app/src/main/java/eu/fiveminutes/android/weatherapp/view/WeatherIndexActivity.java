@@ -7,12 +7,12 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnItemClick;
 import eu.fiveminutes.android.weatherapp.R;
 import eu.fiveminutes.android.weatherapp.config.Config;
 import eu.fiveminutes.android.weatherapp.model.WeatherResponse;
@@ -22,10 +22,6 @@ import eu.fiveminutes.android.weatherapp.presenter.WeatherIndexPresenterImpl;
 public final class WeatherIndexActivity extends Activity implements WeatherIndexView{
 
     private WeatherArrayAdapter weatherArrayAdapter;
-
-    public static final String DATA = "data";
-
-    private static final int INTENT_ID = 666;
 
     @BindView(R.id.listview)
     ListView listview;
@@ -43,19 +39,6 @@ public final class WeatherIndexActivity extends Activity implements WeatherIndex
         weatherArrayAdapter = new WeatherArrayAdapter(this, new ArrayList<WeatherResponse>(Config.CITIES.length));
         listview.setAdapter(weatherArrayAdapter);
 
-        listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                final WeatherResponse weatherResponse = (WeatherResponse) adapterView.getItemAtPosition(i);
-
-                final Intent intent = new Intent(WeatherIndexActivity.this, DetailsActivity.class);
-                intent.putExtra(DATA, weatherResponse);
-
-                startActivityForResult(intent, INTENT_ID);
-            }
-        });
-
-
         final WeatherIndexPresenter weatherIndexPresenter = new WeatherIndexPresenterImpl(this);
         weatherIndexPresenter.getData();
     }
@@ -72,6 +55,15 @@ public final class WeatherIndexActivity extends Activity implements WeatherIndex
 
     @Override
     public void showErrorMessage() {
-        textView.setText(Config.ERROR_MESSAGE);
+        textView.setText(R.string.network_error);
+    }
+
+    @OnItemClick(R.id.listview)
+    public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+        final WeatherResponse weatherResponse = (WeatherResponse) adapterView.getItemAtPosition(i);
+
+        //final Intent intent = new Intent(WeatherIndexActivity.this, WeatherDetailsActivity.class);
+        final Intent intent = WeatherDetailsActivity.newIntent(this, weatherResponse);
+        startActivity(intent);
     }
 }

@@ -6,4 +6,5 @@
     <string name="humidity">Humidity:</string>
     <string name="wind">Wind:</string>
     <string name="cloudness">Cloudness:</string>
+    <string name="network_error">Please check your network connection!</string>
 </resources>

@@ -7,6 +7,4 @@ public class Config {
     public static final String IMAGE_URL = "http://openweathermap.org/img/w/";
 
     public static final String[] CITIES = new String[] { "Zagreb",  "Rijeka", "Osijek", "Split", "Vinkovci", "Pula", "Zadar", "Dubrovnik", "SlavonskiBrod", "Knin"};
-
-    public static final String ERROR_MESSAGE = "Please check your network connection!";
 }

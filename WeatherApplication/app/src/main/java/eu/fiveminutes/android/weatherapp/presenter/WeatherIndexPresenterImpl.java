@@ -1,5 +1,6 @@
 package eu.fiveminutes.android.weatherapp.presenter;
 
+import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -15,12 +16,12 @@ import retrofit2.Response;
 
 public final class WeatherIndexPresenterImpl implements WeatherIndexPresenter, Callback<WeatherResponse> {
 
-    private final WeatherIndexView weatherIndexView;
+    private final WeakReference<WeatherIndexView> weatherIndexViewWeakReference;
     private final OpenWeatherService openWeatherService;
     private final ArrayList<WeatherResponse> responses;
 
     public WeatherIndexPresenterImpl (WeatherIndexView weatherIndexView) {
-        this.weatherIndexView = weatherIndexView;
+        this.weatherIndexViewWeakReference = new WeakReference<>(weatherIndexView);
         this.openWeatherService = new OpenWeatherServiceImpl();
         this.responses = new ArrayList<>();
     }
@@ -30,10 +31,14 @@ public final class WeatherIndexPresenterImpl implements WeatherIndexPresenter, C
         // no bulk downloading available for free account
         // so we fetch the weather info one by one for each city
 
-        weatherIndexView.clearAllCities();
+        final WeatherIndexView weatherIndexView = weatherIndexViewWeakReference.get();
 
-        for (String city : Config.CITIES) {
-            openWeatherService.getWeatherForCity(city, this);
+        if (weatherIndexView != null) {
+            weatherIndexView.clearAllCities();
+
+            for (String city : Config.CITIES) {
+                openWeatherService.getWeatherForCity(city, this);
+            }
         }
     }
 
@@ -45,16 +50,27 @@ public final class WeatherIndexPresenterImpl implements WeatherIndexPresenter, C
         if (responses.size() == Config.CITIES.length) {
             Collections.sort(responses, new Comparator<WeatherResponse>() {
                 @Override
-                public int compare(WeatherResponse wr1, WeatherResponse wr2) {
-                    return wr1.city.name.compareTo(wr2.city.name);
+                public int compare(WeatherResponse firstWeatherResponse, WeatherResponse secondWeatherResponse) {
+                    return firstWeatherResponse.city.name.compareTo(secondWeatherResponse.city.name);
                 }
             });
-            weatherIndexView.renderCities(responses);
+
+            final WeatherIndexView weatherIndexView = weatherIndexViewWeakReference.get();
+
+            if (weatherIndexView != null) {
+                weatherIndexView.renderCities(responses);
+            }
+
         }
     }
 
     @Override
     public void onFailure(Call<WeatherResponse> call, Throwable t) {
-        weatherIndexView.showErrorMessage();
+        final WeatherIndexView weatherIndexView = weatherIndexViewWeakReference.get();
+
+        if (weatherIndexView != null) {
+            weatherIndexView.showErrorMessage();
+        }
+
     }
 }
