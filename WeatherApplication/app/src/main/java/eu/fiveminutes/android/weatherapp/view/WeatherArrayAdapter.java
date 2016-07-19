@@ -21,6 +21,8 @@ import eu.fiveminutes.android.weatherapp.model.WeatherResponse;
 public final class  WeatherArrayAdapter extends ArrayAdapter<WeatherResponse>{
     private final Context context;
     private final ArrayList<WeatherResponse> responses;
+    private static final int FIRST = 0;
+    private static final int TODAY = 0;
 
     public WeatherArrayAdapter(Context context, ArrayList<WeatherResponse> responses) {
         super(context, R.layout.rowlayout, responses);
@@ -42,10 +44,10 @@ public final class  WeatherArrayAdapter extends ArrayAdapter<WeatherResponse>{
         final WeatherResponse weatherResponse = responses.get(position);
 
         viewHolder.city.setText(weatherResponse.city.name);
-        viewHolder.tempMin.setText(renderUtil.doubleToIntString(weatherResponse.days.get(0).temperature.min) + "°C");
-        viewHolder.tempMax.setText(renderUtil.doubleToIntString(weatherResponse.days.get(0).temperature.max) + "°C");
+        viewHolder.tempMin.setText(renderUtil.getTemperatureString(weatherResponse.days.get(FIRST).temperature.min));
+        viewHolder.tempMax.setText(renderUtil.getTemperatureString(weatherResponse.days.get(FIRST).temperature.max));
         Picasso.with(context)
-                .load(renderUtil.getImageURL(weatherResponse.days.get(0).descriptionList.get(0).imageID))
+                .load(renderUtil.getImageURL(weatherResponse.days.get(TODAY).descriptionList.get(FIRST).imageID))
                 .into(viewHolder.imageView);
 
         return rowView;

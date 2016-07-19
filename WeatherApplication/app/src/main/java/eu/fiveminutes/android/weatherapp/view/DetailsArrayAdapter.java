@@ -23,6 +23,8 @@ public class DetailsArrayAdapter extends ArrayAdapter<Weather>{
     private final Context context;
     private final ArrayList<Weather> days;
 
+    private static final int FIRST = 0;
+
     public DetailsArrayAdapter(Context context, ArrayList<Weather> days) {
         super(context, R.layout.rowlayout, days);
         this.context = context;
@@ -42,11 +44,11 @@ public class DetailsArrayAdapter extends ArrayAdapter<Weather>{
 
         final Weather weather = days.get(position);
 
-        viewHolder.city.setText(weather.descriptionList.get(0).shortDescription);
-        viewHolder.tempMin.setText(renderUtil.doubleToIntString(weather.temperature.min) + "°C");
-        viewHolder.tempMax.setText(renderUtil.doubleToIntString(weather.temperature.max) + "°C");
+        viewHolder.city.setText(weather.descriptionList.get(FIRST).shortDescription);
+        viewHolder.tempMin.setText(renderUtil.getTemperatureString(weather.temperature.min));
+        viewHolder.tempMax.setText(renderUtil.getTemperatureString(weather.temperature.max));
         Picasso.with(context)
-                .load(renderUtil.getImageURL(weather.descriptionList.get(0).imageID))
+                .load(renderUtil.getImageURL(weather.descriptionList.get(FIRST).imageID))
                 .into(viewHolder.imageView);
 
         return rowView;

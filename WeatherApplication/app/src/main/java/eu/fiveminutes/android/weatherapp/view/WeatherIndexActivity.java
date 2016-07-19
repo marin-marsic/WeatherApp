@@ -22,7 +22,6 @@ import eu.fiveminutes.android.weatherapp.presenter.WeatherIndexPresenterImpl;
 public final class WeatherIndexActivity extends Activity implements WeatherIndexView{
 
     private WeatherArrayAdapter weatherArrayAdapter;
-    private WeatherIndexPresenter weatherIndexPresenter;
 
     public static final String DATA = "data";
 
@@ -57,7 +56,7 @@ public final class WeatherIndexActivity extends Activity implements WeatherIndex
         });
 
 
-        weatherIndexPresenter = new WeatherIndexPresenterImpl(this);
+        final WeatherIndexPresenter weatherIndexPresenter = new WeatherIndexPresenterImpl(this);
         weatherIndexPresenter.getData();
     }
 

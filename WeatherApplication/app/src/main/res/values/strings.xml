@@ -2,4 +2,8 @@
     <string name="app_name">WeatherApplication</string>
     <string name="header">Available cities:</string>
     <string name="next_days">next days:</string>
+    <string name="temperature">Temperature:</string>
+    <string name="humidity">Humidity:</string>
+    <string name="wind">Wind:</string>
+    <string name="cloudness">Cloudness:</string>
 </resources>

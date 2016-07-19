@@ -49,6 +49,7 @@ public final class DetailsActivity extends Activity {
     ListView listview;
 
     private static final int TODAY = 0;
+    private static final int FIRST = 0;
 
     private DetailsArrayAdapter detailsArrayAdapter;
 
@@ -65,13 +66,13 @@ public final class DetailsActivity extends Activity {
 
         header.setText(weatherResponse.city.name);
         Picasso.with(this)
-                .load(renderUtil.getImageURL(weatherResponse.days.get(TODAY).descriptionList.get(0).imageID))
+                .load(renderUtil.getImageURL(weatherResponse.days.get(TODAY).descriptionList.get(FIRST).imageID))
                 .into(imageView);
 
         final Weather today = weatherResponse.days.get(TODAY);
 
-        shortDescription.setText(today.descriptionList.get(0).shortDescription);
-        longDescription.setText(today.descriptionList.get(0).longDescription);
+        shortDescription.setText(today.descriptionList.get(FIRST).shortDescription);
+        longDescription.setText(today.descriptionList.get(FIRST).longDescription);
 
         temperature.setText(renderUtil.getTemperatureString(today.temperature.day));
         humidity.setText(renderUtil.getHumidityString(today.humidity));
@@ -79,7 +80,7 @@ public final class DetailsActivity extends Activity {
         clouds.setText(renderUtil.getCloudnessString(today.clouds));
         pressure.setText(renderUtil.getPressureString(today.pressure));
 
-        ArrayList<Weather> days = new ArrayList<>(weatherResponse.days);
+        final ArrayList<Weather> days = new ArrayList<>(weatherResponse.days);
         days.remove(TODAY);
 
         detailsArrayAdapter = new DetailsArrayAdapter(this, days);

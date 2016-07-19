@@ -46,50 +46,111 @@
         android:gravity="center_vertical" />
 
     <TextView
-        android:id="@+id/temperature"
-        android:layout_width="fill_parent"
+        android:id="@+id/temperatureLabel"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/longDescription"
         android:paddingTop="@dimen/activity_vertical_margin"
         android:paddingLeft="@dimen/activity_horizontal_margin"
         android:textSize="@dimen/default_font_size"
+        android:text="@string/temperature"
         android:gravity="center_vertical" />
 
     <TextView
-        android:id="@+id/humidity"
-        android:layout_width="fill_parent"
+        android:id="@+id/temperature"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/longDescription"
+        android:layout_toRightOf="@+id/temperatureLabel"
+        android:paddingTop="@dimen/activity_vertical_margin"
+        android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:textSize="@dimen/default_font_size"
+        android:gravity="center_vertical" />
+
+    <TextView
+        android:id="@+id/humidityLabel"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/temperature"
         android:paddingTop="@dimen/activity_vertical_margin"
         android:paddingLeft="@dimen/activity_horizontal_margin"
         android:textSize="@dimen/default_font_size"
+        android:text="@string/humidity"
         android:gravity="center_vertical" />
 
     <TextView
-        android:id="@+id/wind"
-        android:layout_width="fill_parent"
+        android:id="@+id/humidity"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/temperature"
+        android:layout_toRightOf="@+id/humidityLabel"
+        android:paddingTop="@dimen/activity_vertical_margin"
+        android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:textSize="@dimen/default_font_size"
+        android:gravity="center_vertical" />
+
+    <TextView
+        android:id="@+id/windLabel"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/humidity"
         android:paddingTop="@dimen/activity_vertical_margin"
         android:paddingLeft="@dimen/activity_horizontal_margin"
         android:textSize="@dimen/default_font_size"
+        android:text="@string/wind"
         android:gravity="center_vertical" />
 
     <TextView
-        android:id="@+id/clouds"
-        android:layout_width="fill_parent"
+        android:id="@+id/wind"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/wind"
+        android:layout_below="@+id/humidity"
+        android:layout_toRightOf="@+id/windLabel"
         android:paddingTop="@dimen/activity_vertical_margin"
         android:paddingLeft="@dimen/activity_horizontal_margin"
         android:textSize="@dimen/default_font_size"
         android:gravity="center_vertical" />
 
     <TextView
-        android:id="@+id/pressure"
-        android:layout_width="fill_parent"
+        android:id="@+id/cloudsLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/wind"
+        android:paddingTop="@dimen/activity_vertical_margin"
+        android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:textSize="@dimen/default_font_size"
+        android:text="@string/cloudness"
+        android:gravity="center_vertical" />
+
+    <TextView
+        android:id="@+id/clouds"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/wind"
+        android:layout_toRightOf="@id/cloudsLabel"
+        android:paddingTop="@dimen/activity_vertical_margin"
+        android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:textSize="@dimen/default_font_size"
+        android:gravity="center_vertical" />
+
+    <TextView
+        android:id="@+id/pressureLabel"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/clouds"
+        android:paddingTop="@dimen/activity_vertical_margin"
+        android:paddingBottom="@dimen/activity_vertical_margin"
+        android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:textSize="@dimen/default_font_size"
+        android:text="Pressure:"
+        android:gravity="center_vertical" />
+
+    <TextView
+        android:id="@+id/pressure"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/clouds"
+        android:layout_toRightOf="@+id/pressureLabel"
         android:paddingTop="@dimen/activity_vertical_margin"
         android:paddingBottom="@dimen/activity_vertical_margin"
         android:paddingLeft="@dimen/activity_horizontal_margin"
