@@ -10,4 +10,7 @@
     <dimen name="header_font_size">20sp</dimen>
     <dimen name="icon_width">50dp</dimen>
     <dimen name="default_font_size">16sp</dimen>
+    <dimen name="search_icon_width">35dp</dimen>
+    <dimen name="search_icon_height">35dp</dimen>
+    <dimen name="zero">0dp</dimen>
 </resources>

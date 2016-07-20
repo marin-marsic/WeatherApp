@@ -3,19 +3,27 @@ package eu.fiveminutes.android.weatherapp.view;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.View;
+import android.view.inputmethod.EditorInfo;
 import android.widget.AdapterView;
+import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import butterknife.OnItemClick;
 import eu.fiveminutes.android.weatherapp.R;
 import eu.fiveminutes.android.weatherapp.config.Config;
 import eu.fiveminutes.android.weatherapp.model.WeatherResponse;
+import eu.fiveminutes.android.weatherapp.presenter.CitySearchPresenter;
+import eu.fiveminutes.android.weatherapp.presenter.CitySearchPresenterImpl;
 import eu.fiveminutes.android.weatherapp.presenter.WeatherIndexPresenter;
 import eu.fiveminutes.android.weatherapp.presenter.WeatherIndexPresenterImpl;
 
@@ -29,6 +37,12 @@ public final class WeatherIndexActivity extends Activity implements WeatherIndex
     @BindView(R.id.error)
     TextView textView;
 
+    @BindView(R.id.searchButton)
+    ImageView searchIcon;
+
+    @BindView(R.id.cityQuery)
+    EditText cityInput;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +52,8 @@ public final class WeatherIndexActivity extends Activity implements WeatherIndex
 
         weatherArrayAdapter = new WeatherArrayAdapter(this, new ArrayList<WeatherResponse>(Config.CITIES.length));
         listview.setAdapter(weatherArrayAdapter);
+
+        addInputListener();
 
         final WeatherIndexPresenter weatherIndexPresenter = new WeatherIndexPresenterImpl(this);
         weatherIndexPresenter.getData();
@@ -62,8 +78,36 @@ public final class WeatherIndexActivity extends Activity implements WeatherIndex
     public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
         final WeatherResponse weatherResponse = (WeatherResponse) adapterView.getItemAtPosition(i);
 
-        //final Intent intent = new Intent(WeatherIndexActivity.this, WeatherDetailsActivity.class);
         final Intent intent = WeatherDetailsActivity.newIntent(this, weatherResponse);
         startActivity(intent);
+    }
+
+    @OnClick(R.id.searchButton)
+    public void onClick(View view) {
+        search();
+    }
+
+    @Override
+    public void showSearchResult(final WeatherResponse weatherResponse) {
+        final Intent intent = SearchResultActivity.newIntent(this, weatherResponse);
+        startActivity(intent);
+    }
+
+    private void search() {
+        final String city = cityInput.getText().toString();
+        final CitySearchPresenter searchPresenter = new CitySearchPresenterImpl(WeatherIndexActivity.this);
+        searchPresenter.getDataForCity(city);
+    }
+
+    private void addInputListener() {
+        cityInput.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView textView, int actionId, KeyEvent keyEvent) {
+                if ((keyEvent != null && (keyEvent.getKeyCode() == KeyEvent.KEYCODE_ENTER)) || (actionId == EditorInfo.IME_ACTION_DONE)) {
+                    search();
+                }
+                return false;
+            }
+        });
     }
 }

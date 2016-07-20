@@ -8,4 +8,6 @@
     <string name="cloudness">Cloudness:</string>
     <string name="network_error">Please check your network connection!</string>
     <string name="pressure">Pressure:</string>
+    <string name="search_results">Search results:</string>
+    <string name="search_for_the_city">Search for the city</string>
 </resources>

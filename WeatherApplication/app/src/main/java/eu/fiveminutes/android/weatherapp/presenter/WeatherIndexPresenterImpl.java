@@ -69,6 +69,7 @@ public final class WeatherIndexPresenterImpl implements WeatherIndexPresenter, C
         final WeatherIndexView weatherIndexView = weatherIndexViewWeakReference.get();
 
         if (weatherIndexView != null) {
+            weatherIndexView.clearAllCities();
             weatherIndexView.showErrorMessage();
         }
 
