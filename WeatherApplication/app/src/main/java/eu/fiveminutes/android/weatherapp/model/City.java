@@ -1,9 +1,12 @@
 package eu.fiveminutes.android.weatherapp.model;
 
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import com.google.gson.annotations.SerializedName;
 
-public final class City {
+public final class City implements Parcelable {
 
     @SerializedName("id")
     public final String id;
@@ -19,4 +22,33 @@ public final class City {
         this.name = name;
         this.country = country;
     }
+
+    public City(Parcel in) {
+        this.id = in.readString();
+        this.name = in.readString();
+        this.country = in.readString();
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel parcel, int i) {
+        parcel.writeString(id);
+        parcel.writeString(name);
+        parcel.writeString(country);
+    }
+
+    public static final Parcelable.Creator CREATOR =
+            new Parcelable.Creator() {
+                public City createFromParcel(Parcel in) {
+                    return new City(in);
+                }
+
+                public City[] newArray(int size) {
+                    return new City[size];
+                }
+            };
 }

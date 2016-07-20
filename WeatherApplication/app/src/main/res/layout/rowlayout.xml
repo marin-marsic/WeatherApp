@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="?android:attr/listPreferredItemHeight"
+    android:padding="@dimen/padding" >
+
+    <ImageView
+        android:id="@+id/icon"
+        android:layout_width="wrap_content"
+        android:layout_height="fill_parent"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginRight="@dimen/padding" />
+
+    <TextView
+        android:id="@+id/tempMin"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/temp_height"
+        android:layout_alignParentBottom="true"
+        android:layout_toRightOf="@id/icon"
+        android:layout_marginRight="@dimen/padding"
+        android:textSize="@dimen/temperature_min_max_font_size"
+        android:textColor="@color/cold" />
+
+    <TextView
+        android:id="@+id/tempMax"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/temp_height"
+        android:layout_alignParentBottom="true"
+        android:layout_toRightOf="@id/tempMin"
+        android:ellipsize="marquee"
+        android:singleLine="true"
+        android:textSize="@dimen/temperature_min_max_font_size"
+        android:textColor="@color/hot"/>
+
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/tempMin"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignWithParentIfMissing="true"
+        android:layout_toRightOf="@id/icon"
+        android:gravity="center_vertical"
+        android:textSize="@dimen/city_name_font_size" />
+
+</RelativeLayout>
