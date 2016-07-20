@@ -3,6 +3,7 @@ package eu.fiveminutes.android.weatherapp.view;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
@@ -43,6 +44,9 @@ public final class WeatherIndexActivity extends Activity implements WeatherIndex
     @BindView(R.id.city_query)
     EditText cityInput;
 
+    @BindView(R.id.index_swipe_refresh)
+    SwipeRefreshLayout swipeRefreshLayout;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,6 +58,7 @@ public final class WeatherIndexActivity extends Activity implements WeatherIndex
         listview.setAdapter(weatherArrayAdapter);
 
         addInputListener();
+        addRefreshListener();
 
         final WeatherIndexPresenter weatherIndexPresenter = new WeatherIndexPresenterImpl(this);
         weatherIndexPresenter.getData();
@@ -62,6 +67,8 @@ public final class WeatherIndexActivity extends Activity implements WeatherIndex
     @Override
     public void renderCities(final ArrayList<WeatherResponse> responses) {
         weatherArrayAdapter.addAll(responses);
+        textView.setText("");
+        swipeRefreshLayout.setRefreshing(false);
     }
 
     @Override
@@ -71,6 +78,7 @@ public final class WeatherIndexActivity extends Activity implements WeatherIndex
 
     @Override
     public void showErrorMessage() {
+        swipeRefreshLayout.setRefreshing(false);
         textView.setText(R.string.network_error);
     }
 
@@ -97,6 +105,16 @@ public final class WeatherIndexActivity extends Activity implements WeatherIndex
         final String city = cityInput.getText().toString();
         final CitySearchPresenter searchPresenter = new CitySearchPresenterImpl(WeatherIndexActivity.this);
         searchPresenter.getDataForCity(city);
+    }
+
+    private void addRefreshListener() {
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                final WeatherIndexPresenter weatherIndexPresenter = new WeatherIndexPresenterImpl(WeatherIndexActivity.this);
+                weatherIndexPresenter.getData();
+            }
+        });
     }
 
     private void addInputListener() {
