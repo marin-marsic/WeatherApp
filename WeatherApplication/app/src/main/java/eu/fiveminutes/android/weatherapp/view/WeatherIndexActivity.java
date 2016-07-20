@@ -36,7 +36,7 @@ public final class WeatherIndexActivity extends Activity implements WeatherIndex
     ListView listview;
 
     @BindView(R.id.error)
-    TextView textView;
+    TextView error;
 
     @BindView(R.id.search_button)
     ImageView searchIcon;
@@ -67,7 +67,7 @@ public final class WeatherIndexActivity extends Activity implements WeatherIndex
     @Override
     public void renderCities(final ArrayList<WeatherResponse> responses) {
         weatherArrayAdapter.addAll(responses);
-        textView.setText("");
+        error.setText("");
         swipeRefreshLayout.setRefreshing(false);
     }
 
@@ -79,7 +79,7 @@ public final class WeatherIndexActivity extends Activity implements WeatherIndex
     @Override
     public void showErrorMessage() {
         swipeRefreshLayout.setRefreshing(false);
-        textView.setText(R.string.network_error);
+        error.setText(R.string.network_error);
     }
 
     @OnItemClick(R.id.listview)
