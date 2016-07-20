@@ -36,7 +36,7 @@ public final class SearchResultActivity extends Activity {
     TextView errorView;
 
     public static Intent createIntent(final Context context, final WeatherResponse weatherResponse) {
-        Intent intent = new Intent(context, SearchResultActivity.class);
+        final Intent intent = new Intent(context, SearchResultActivity.class);
         intent.putExtra(DATA, weatherResponse);
         return intent;
     }
