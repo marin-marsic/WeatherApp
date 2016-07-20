@@ -54,7 +54,7 @@ public final class WeatherIndexActivity extends Activity implements WeatherIndex
         setContentView(R.layout.activity_weather_index);
         ButterKnife.bind(this);
 
-        weatherArrayAdapter = new WeatherArrayAdapter(this, new ArrayList<WeatherResponse>(Config.CITIES.length));
+        weatherArrayAdapter = new WeatherArrayAdapter(this, new ArrayList<>(Config.CITIES.length));
         listview.setAdapter(weatherArrayAdapter);
 
         addInputListener();
@@ -108,24 +108,18 @@ public final class WeatherIndexActivity extends Activity implements WeatherIndex
     }
 
     private void addRefreshListener() {
-        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
+        swipeRefreshLayout.setOnRefreshListener(() -> {
                 final WeatherIndexPresenter weatherIndexPresenter = new WeatherIndexPresenterImpl(WeatherIndexActivity.this);
                 weatherIndexPresenter.getData();
-            }
         });
     }
 
     private void addInputListener() {
-        cityInput.setOnEditorActionListener(new TextView.OnEditorActionListener() {
-            @Override
-            public boolean onEditorAction(TextView textView, int actionId, KeyEvent keyEvent) {
+        cityInput.setOnEditorActionListener((textView, actionId, keyEvent) -> {
                 if ((keyEvent != null && (keyEvent.getKeyCode() == KeyEvent.KEYCODE_ENTER)) || (actionId == EditorInfo.IME_ACTION_DONE)) {
                     search();
                 }
                 return false;
-            }
         });
     }
 }

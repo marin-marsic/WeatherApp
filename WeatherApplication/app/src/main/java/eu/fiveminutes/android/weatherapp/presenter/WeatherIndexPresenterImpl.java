@@ -48,12 +48,8 @@ public final class WeatherIndexPresenterImpl implements WeatherIndexPresenter, C
         responses.add(response.body());
 
         if (responses.size() == Config.CITIES.length) {
-            Collections.sort(responses, new Comparator<WeatherResponse>() {
-                @Override
-                public int compare(WeatherResponse firstWeatherResponse, WeatherResponse secondWeatherResponse) {
-                    return firstWeatherResponse.city.name.compareTo(secondWeatherResponse.city.name);
-                }
-            });
+            Collections.sort(responses, (firstWeatherResponse, secondWeatherResponse) ->
+                    firstWeatherResponse.city.name.compareTo(secondWeatherResponse.city.name));
 
             final WeatherIndexView weatherIndexView = weatherIndexViewWeakReference.get();
 
