@@ -14,21 +14,21 @@
         android:layout_height="@dimen/zero"/>
 
     <EditText
-        android:id="@+id/cityQuery"
+        android:id="@+id/city_query"
         android:hint="@string/search_for_the_city"
         android:layout_width="fill_parent"
         android:inputType="text"
-        android:nextFocusUp="@id/cityQuery"
-        android:nextFocusLeft="@id/cityQuery"
+        android:nextFocusUp="@id/city_query"
+        android:nextFocusLeft="@id/city_query"
         android:paddingBottom="@dimen/activity_vertical_margin"
-        android:layout_toLeftOf="@+id/searchButton"
+        android:layout_toLeftOf="@+id/search_button"
         android:layout_height="@dimen/header_height"
         android:layout_marginRight="@dimen/padding"
         android:layout_marginLeft="@dimen/padding"
         android:layout_marginBottom="@dimen/padding" />
 
     <ImageView
-        android:id="@+id/searchButton"
+        android:id="@+id/search_button"
         android:layout_width="@dimen/search_icon_width"
         android:layout_height="@dimen/search_icon_height"
         android:background="@drawable/search_icon"
@@ -46,7 +46,7 @@
         android:textColor="@color/header_font"
         android:textSize="@dimen/header_font_size"
         android:paddingLeft="@dimen/activity_horizontal_margin"
-        android:layout_below="@+id/searchButton"
+        android:layout_below="@+id/search_button"
         android:text="@string/header" />
 
     <ListView xmlns:android="http://schemas.android.com/apk/res/android"

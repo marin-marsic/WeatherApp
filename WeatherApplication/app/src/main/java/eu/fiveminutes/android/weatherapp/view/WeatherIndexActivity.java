@@ -78,7 +78,7 @@ public final class WeatherIndexActivity extends Activity implements WeatherIndex
     public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
         final WeatherResponse weatherResponse = (WeatherResponse) adapterView.getItemAtPosition(i);
 
-        final Intent intent = WeatherDetailsActivity.newIntent(this, weatherResponse);
+        final Intent intent = WeatherDetailsActivity.createIntent(this, weatherResponse);
         startActivity(intent);
     }
 
@@ -89,7 +89,7 @@ public final class WeatherIndexActivity extends Activity implements WeatherIndex
 
     @Override
     public void showSearchResult(final WeatherResponse weatherResponse) {
-        final Intent intent = SearchResultActivity.newIntent(this, weatherResponse);
+        final Intent intent = SearchResultActivity.createIntent(this, weatherResponse);
         startActivity(intent);
     }
 

@@ -19,7 +19,7 @@
         </activity>
         <activity android:name=".MainActivity" />
         <activity android:name=".view.WeatherDetailsActivity" />
-        <activity android:name=".view.SearchResultActivity"></activity>
+        <activity android:name=".view.SearchResultActivity"/>
     </application>
 
 </manifest>

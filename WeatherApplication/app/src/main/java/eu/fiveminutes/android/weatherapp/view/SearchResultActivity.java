@@ -16,6 +16,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnItemClick;
 import eu.fiveminutes.android.weatherapp.R;
+import eu.fiveminutes.android.weatherapp.model.Weather;
 import eu.fiveminutes.android.weatherapp.model.WeatherResponse;
 
 public final class SearchResultActivity extends Activity {
@@ -34,7 +35,7 @@ public final class SearchResultActivity extends Activity {
     @BindView(R.id.error)
     TextView errorView;
 
-    public static Intent newIntent(final Context context, final WeatherResponse weatherResponse) {
+    public static Intent createIntent(final Context context, final WeatherResponse weatherResponse) {
         Intent intent = new Intent(context, SearchResultActivity.class);
         intent.putExtra(DATA, weatherResponse);
         return intent;
@@ -59,12 +60,19 @@ public final class SearchResultActivity extends Activity {
         startActivity(intent);
     }
 
-    private void showContent(WeatherResponse weatherResponse) {
+    private void showContent(final WeatherResponse weatherResponse) {
         if (!weatherResponse.code.equals(OK_CODE)) {
-            errorView.setText(weatherResponse.message);
-            return;
+            showError(weatherResponse);
+        } else {
+            showResult(weatherResponse);
         }
+    }
 
+    private void showError(final WeatherResponse weatherResponse) {
+        errorView.setText(weatherResponse.message);
+    }
+
+    private void showResult(final WeatherResponse weatherResponse) {
         final ArrayList<WeatherResponse> responses = new ArrayList<>();
         responses.add(weatherResponse);
 
