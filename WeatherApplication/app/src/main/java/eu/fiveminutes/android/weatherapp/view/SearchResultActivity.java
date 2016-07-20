@@ -48,7 +48,7 @@ public final class SearchResultActivity extends Activity {
         ButterKnife.bind(this);
 
         final WeatherResponse weatherResponse = getIntent().getExtras().getParcelable(DATA);
-        initialize(weatherResponse);
+        showContent(weatherResponse);
     }
 
     @OnItemClick(R.id.listview)
@@ -59,7 +59,7 @@ public final class SearchResultActivity extends Activity {
         startActivity(intent);
     }
 
-    private void initialize(WeatherResponse weatherResponse) {
+    private void showContent(WeatherResponse weatherResponse) {
         if (!weatherResponse.code.equals(OK_CODE)) {
             errorView.setText(weatherResponse.message);
             return;

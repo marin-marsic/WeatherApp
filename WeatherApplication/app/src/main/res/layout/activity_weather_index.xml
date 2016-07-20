@@ -31,7 +31,7 @@
         android:id="@+id/searchButton"
         android:layout_width="@dimen/search_icon_width"
         android:layout_height="@dimen/search_icon_height"
-        android:background="@drawable/search_icon_hi"
+        android:background="@drawable/search_icon"
         android:layout_alignParentRight="true"
         android:layout_marginRight="@dimen/padding"
         android:layout_marginLeft="@dimen/padding"
