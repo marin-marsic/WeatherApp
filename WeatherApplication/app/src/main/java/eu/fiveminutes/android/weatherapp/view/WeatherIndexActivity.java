@@ -37,10 +37,10 @@ public final class WeatherIndexActivity extends Activity implements WeatherIndex
     @BindView(R.id.error)
     TextView textView;
 
-    @BindView(R.id.searchButton)
+    @BindView(R.id.search_button)
     ImageView searchIcon;
 
-    @BindView(R.id.cityQuery)
+    @BindView(R.id.city_query)
     EditText cityInput;
 
 
@@ -82,7 +82,7 @@ public final class WeatherIndexActivity extends Activity implements WeatherIndex
         startActivity(intent);
     }
 
-    @OnClick(R.id.searchButton)
+    @OnClick(R.id.search_button)
     public void onClick(View view) {
         search();
     }
