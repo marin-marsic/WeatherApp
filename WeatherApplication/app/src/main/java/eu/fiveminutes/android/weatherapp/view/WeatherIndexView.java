@@ -12,4 +12,6 @@ public interface WeatherIndexView {
     void clearAllCities();
 
     void showErrorMessage();
+
+    void showSearchResult(final WeatherResponse weatherResponse);
 }

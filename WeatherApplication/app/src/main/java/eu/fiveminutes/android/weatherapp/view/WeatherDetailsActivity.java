@@ -58,7 +58,7 @@ public final class WeatherDetailsActivity extends Activity {
     private WeatherDetailsAdapter weatherDetailsAdapter;
 
 
-    public static Intent newIntent(final Context context, final WeatherResponse weatherResponse) {
+    public static Intent createIntent(final Context context, final WeatherResponse weatherResponse) {
         Intent intent = new Intent(context, WeatherDetailsActivity.class);
         intent.putExtra(DATA, weatherResponse);
         return intent;
