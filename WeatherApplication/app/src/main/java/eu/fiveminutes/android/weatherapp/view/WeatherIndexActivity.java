@@ -30,7 +30,11 @@ import eu.fiveminutes.android.weatherapp.presenter.WeatherIndexPresenterImpl;
 
 public final class WeatherIndexActivity extends Activity implements WeatherIndexView{
 
+    private static final String EMPTY = "";
+
     private WeatherArrayAdapter weatherArrayAdapter;
+    private WeatherIndexPresenter weatherIndexPresenter;
+    private CitySearchPresenter citySearchPresenter;
 
     @BindView(R.id.listview)
     ListView listview;
@@ -60,14 +64,16 @@ public final class WeatherIndexActivity extends Activity implements WeatherIndex
         addInputListener();
         addRefreshListener();
 
-        final WeatherIndexPresenter weatherIndexPresenter = new WeatherIndexPresenterImpl(this);
+        weatherIndexPresenter = new WeatherIndexPresenterImpl(this);
         weatherIndexPresenter.getData();
+
+        citySearchPresenter = new CitySearchPresenterImpl(this);
     }
 
     @Override
     public void renderCities(final ArrayList<WeatherResponse> responses) {
         weatherArrayAdapter.addAll(responses);
-        error.setText("");
+        error.setText(EMPTY);
         swipeRefreshLayout.setRefreshing(false);
     }
 
@@ -103,13 +109,12 @@ public final class WeatherIndexActivity extends Activity implements WeatherIndex
 
     private void search() {
         final String city = cityInput.getText().toString();
-        final CitySearchPresenter searchPresenter = new CitySearchPresenterImpl(WeatherIndexActivity.this);
-        searchPresenter.getDataForCity(city);
+        citySearchPresenter.getDataForCity(city);
     }
 
     private void addRefreshListener() {
         swipeRefreshLayout.setOnRefreshListener(() -> {
-                final WeatherIndexPresenter weatherIndexPresenter = new WeatherIndexPresenterImpl(WeatherIndexActivity.this);
+                //final WeatherIndexPresenter weatherIndexPresenter = new WeatherIndexPresenterImpl(WeatherIndexActivity.this);
                 weatherIndexPresenter.getData();
         });
     }

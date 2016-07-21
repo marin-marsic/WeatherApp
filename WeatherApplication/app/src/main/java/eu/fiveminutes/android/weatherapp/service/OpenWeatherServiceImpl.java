@@ -1,6 +1,8 @@
 package eu.fiveminutes.android.weatherapp.service;
 
 
+import android.util.Log;
+
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 

@@ -1,5 +1,7 @@
 package eu.fiveminutes.android.weatherapp.presenter;
 
+import android.util.Log;
+
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -34,6 +36,7 @@ public final class WeatherIndexPresenterImpl implements WeatherIndexPresenter, C
         final WeatherIndexView weatherIndexView = weatherIndexViewWeakReference.get();
 
         if (weatherIndexView != null) {
+            responses.clear();
             weatherIndexView.clearAllCities();
 
             for (String city : Config.CITIES) {
