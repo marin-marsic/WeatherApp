@@ -6,7 +6,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class BulkDataCallback implements Callback<WeatherResponse> {
+public final class BulkDataCallback implements Callback<WeatherResponse> {
 
     private final WeatherIndexPresenter weatherIndexPresenter;
 
