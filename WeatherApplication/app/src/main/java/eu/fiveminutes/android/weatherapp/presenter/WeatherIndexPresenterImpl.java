@@ -1,31 +1,32 @@
 package eu.fiveminutes.android.weatherapp.presenter;
 
-import android.util.Log;
-
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Comparator;
 
 import eu.fiveminutes.android.weatherapp.config.Config;
 import eu.fiveminutes.android.weatherapp.model.WeatherResponse;
 import eu.fiveminutes.android.weatherapp.service.OpenWeatherService;
-import eu.fiveminutes.android.weatherapp.service.OpenWeatherServiceImpl;
 import eu.fiveminutes.android.weatherapp.view.WeatherIndexView;
-import retrofit2.Call;
 import retrofit2.Callback;
-import retrofit2.Response;
 
-public final class WeatherIndexPresenterImpl implements WeatherIndexPresenter, Callback<WeatherResponse> {
+public final class WeatherIndexPresenterImpl implements WeatherIndexPresenter {
 
     private final WeakReference<WeatherIndexView> weatherIndexViewWeakReference;
     private final OpenWeatherService openWeatherService;
+
+    private final Callback<WeatherResponse> searchCallback;
+    private final Callback<WeatherResponse> bulkCallback;
+
     private final ArrayList<WeatherResponse> responses;
 
-    public WeatherIndexPresenterImpl (WeatherIndexView weatherIndexView) {
+    public WeatherIndexPresenterImpl (final WeatherIndexView weatherIndexView, final OpenWeatherService openWeatherService) {
         this.weatherIndexViewWeakReference = new WeakReference<>(weatherIndexView);
-        this.openWeatherService = new OpenWeatherServiceImpl();
+        this.openWeatherService = openWeatherService;
         this.responses = new ArrayList<>();
+
+        this.searchCallback = new CitySearchCallback(this);
+        this.bulkCallback = new BulkDataCallback(this);
     }
 
     @Override
@@ -40,15 +41,19 @@ public final class WeatherIndexPresenterImpl implements WeatherIndexPresenter, C
             weatherIndexView.clearAllCities();
 
             for (String city : Config.CITIES) {
-                openWeatherService.getWeatherForCity(city, this);
+                openWeatherService.getWeatherForCity(city, bulkCallback);
             }
         }
     }
 
     @Override
-    public void onResponse(Call<WeatherResponse> call, Response<WeatherResponse> response) {
+    public void getDataForCity(String city) {
+        openWeatherService.getWeatherForCity(city, searchCallback);
+    }
 
-        responses.add(response.body());
+    public void onBulkResponse(WeatherResponse weatherResponse) {
+
+        responses.add(weatherResponse);
 
         if (responses.size() == Config.CITIES.length) {
             Collections.sort(responses, (firstWeatherResponse, secondWeatherResponse) ->
@@ -64,13 +69,21 @@ public final class WeatherIndexPresenterImpl implements WeatherIndexPresenter, C
     }
 
     @Override
-    public void onFailure(Call<WeatherResponse> call, Throwable t) {
+    public void onFailure() {
         final WeatherIndexView weatherIndexView = weatherIndexViewWeakReference.get();
 
         if (weatherIndexView != null) {
             weatherIndexView.clearAllCities();
             weatherIndexView.showErrorMessage();
         }
+    }
 
+    @Override
+    public void onSearchResponse(WeatherResponse weatherResponse) {
+        final WeatherIndexView weatherIndexView = weatherIndexViewWeakReference.get();
+
+        if (weatherIndexView != null) {
+            weatherIndexView.showSearchResult(weatherResponse);
+        }
     }
 }

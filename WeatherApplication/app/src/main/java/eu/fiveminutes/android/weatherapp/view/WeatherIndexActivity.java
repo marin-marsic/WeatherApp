@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
@@ -12,29 +13,31 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.ArrayList;
+
+import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.OnItemClick;
 import eu.fiveminutes.android.weatherapp.R;
-import eu.fiveminutes.android.weatherapp.config.Config;
+import eu.fiveminutes.android.weatherapp.dagger2.ActivityComponent;
+import eu.fiveminutes.android.weatherapp.dagger2.ComponentFactory;
+import eu.fiveminutes.android.weatherapp.dagger2.WeatherApplication;
 import eu.fiveminutes.android.weatherapp.model.WeatherResponse;
-import eu.fiveminutes.android.weatherapp.presenter.CitySearchPresenter;
-import eu.fiveminutes.android.weatherapp.presenter.CitySearchPresenterImpl;
 import eu.fiveminutes.android.weatherapp.presenter.WeatherIndexPresenter;
-import eu.fiveminutes.android.weatherapp.presenter.WeatherIndexPresenterImpl;
 
 public final class WeatherIndexActivity extends Activity implements WeatherIndexView{
 
     private static final String EMPTY = "";
 
-    private WeatherArrayAdapter weatherArrayAdapter;
-    private WeatherIndexPresenter weatherIndexPresenter;
-    private CitySearchPresenter citySearchPresenter;
+    @Inject
+    WeatherArrayAdapter weatherArrayAdapter;
+
+    @Inject
+    WeatherIndexPresenter weatherIndexPresenter;
 
     @BindView(R.id.listview)
     ListView listview;
@@ -51,23 +54,26 @@ public final class WeatherIndexActivity extends Activity implements WeatherIndex
     @BindView(R.id.index_swipe_refresh)
     SwipeRefreshLayout swipeRefreshLayout;
 
+    private ActivityComponent activityComponent;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_weather_index);
+
         ButterKnife.bind(this);
 
-        weatherArrayAdapter = new WeatherArrayAdapter(this, new ArrayList<>(Config.CITIES.length));
+        final WeatherApplication weatherApplication = (WeatherApplication) getApplication();
+        activityComponent = ComponentFactory.createActivityComponent(weatherApplication, this);
+        activityComponent.inject(this);
+
         listview.setAdapter(weatherArrayAdapter);
 
         addInputListener();
         addRefreshListener();
 
-        weatherIndexPresenter = new WeatherIndexPresenterImpl(this);
         weatherIndexPresenter.getData();
-
-        citySearchPresenter = new CitySearchPresenterImpl(this);
     }
 
     @Override
@@ -109,7 +115,7 @@ public final class WeatherIndexActivity extends Activity implements WeatherIndex
 
     private void search() {
         final String city = cityInput.getText().toString();
-        citySearchPresenter.getDataForCity(city);
+        weatherIndexPresenter.getDataForCity(city);
     }
 
     private void addRefreshListener() {
