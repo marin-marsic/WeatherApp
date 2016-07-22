@@ -7,7 +7,14 @@ import eu.fiveminutes.android.weatherapp.view.WeatherDetailsActivity;
 import eu.fiveminutes.android.weatherapp.view.WeatherIndexActivity;
 
 @ActivityScope
-@Component(dependencies = {ApplicationComponent.class}, modules = {ActivityModule.class})
+@Component(
+        dependencies = {
+                ApplicationComponent.class
+        },
+        modules = {
+                ActivityModule.class
+        }
+)
 public interface ActivityComponent {
 
     void injectIndex(WeatherIndexActivity weatherIndexActivity);
