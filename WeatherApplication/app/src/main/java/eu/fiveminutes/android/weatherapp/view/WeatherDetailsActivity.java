@@ -12,9 +12,14 @@ import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
+import javax.inject.Inject;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import eu.fiveminutes.android.weatherapp.R;
+import eu.fiveminutes.android.weatherapp.dagger2.ActivityComponent;
+import eu.fiveminutes.android.weatherapp.dagger2.ComponentFactory;
+import eu.fiveminutes.android.weatherapp.dagger2.WeatherApplication;
 import eu.fiveminutes.android.weatherapp.model.Weather;
 import eu.fiveminutes.android.weatherapp.model.WeatherResponse;
 
@@ -55,7 +60,10 @@ public final class WeatherDetailsActivity extends Activity {
     @BindView(R.id.listview)
     ListView listview;
 
-    private WeatherDetailsAdapter weatherDetailsAdapter;
+    @Inject
+    WeatherDetailsAdapter weatherDetailsAdapter;
+
+    private ActivityComponent activityComponent;
 
     public static Intent createIntent(final Context context, final WeatherResponse weatherResponse) {
         final Intent intent = new Intent(context, WeatherDetailsActivity.class);
@@ -68,6 +76,10 @@ public final class WeatherDetailsActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_details);
         ButterKnife.bind(this);
+
+        final WeatherApplication weatherApplication = (WeatherApplication) getApplication();
+        activityComponent = ComponentFactory.createActivityComponent(weatherApplication, this);
+        activityComponent.injectDetails(this);
 
         showContent();
     }
@@ -96,7 +108,7 @@ public final class WeatherDetailsActivity extends Activity {
         final ArrayList<Weather> days = new ArrayList<>(weatherResponse.days);
         days.remove(TODAY);
 
-        weatherDetailsAdapter = new WeatherDetailsAdapter(this, days);
+        weatherDetailsAdapter.addAll(days);
         listview.setAdapter(weatherDetailsAdapter);
     }
 

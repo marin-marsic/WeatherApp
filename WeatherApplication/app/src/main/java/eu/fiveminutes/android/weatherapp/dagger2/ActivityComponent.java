@@ -3,13 +3,16 @@ package eu.fiveminutes.android.weatherapp.dagger2;
 import android.app.Activity;
 
 import dagger.Component;
+import eu.fiveminutes.android.weatherapp.view.WeatherDetailsActivity;
 import eu.fiveminutes.android.weatherapp.view.WeatherIndexActivity;
 
 @ActivityScope
 @Component(dependencies = {ApplicationComponent.class}, modules = {ActivityModule.class})
 public interface ActivityComponent {
 
-    void inject(WeatherIndexActivity weatherIndexActivity);
+    void injectIndex(WeatherIndexActivity weatherIndexActivity);
+
+    void injectDetails(WeatherDetailsActivity weatherDetailsActivity);
 
     final class Initializer {
         private Initializer() {

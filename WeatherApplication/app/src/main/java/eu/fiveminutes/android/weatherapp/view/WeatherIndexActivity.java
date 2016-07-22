@@ -66,7 +66,7 @@ public final class WeatherIndexActivity extends Activity implements WeatherIndex
 
         final WeatherApplication weatherApplication = (WeatherApplication) getApplication();
         activityComponent = ComponentFactory.createActivityComponent(weatherApplication, this);
-        activityComponent.inject(this);
+        activityComponent.injectIndex(this);
 
         listview.setAdapter(weatherArrayAdapter);
 

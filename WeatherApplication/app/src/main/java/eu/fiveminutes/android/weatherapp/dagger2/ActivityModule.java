@@ -10,6 +10,7 @@ import eu.fiveminutes.android.weatherapp.presenter.WeatherIndexPresenter;
 import eu.fiveminutes.android.weatherapp.presenter.WeatherIndexPresenterImpl;
 import eu.fiveminutes.android.weatherapp.service.OpenWeatherService;
 import eu.fiveminutes.android.weatherapp.view.WeatherArrayAdapter;
+import eu.fiveminutes.android.weatherapp.view.WeatherDetailsAdapter;
 import eu.fiveminutes.android.weatherapp.view.WeatherIndexView;
 
 @Module
@@ -35,6 +36,12 @@ public final class ActivityModule {
     @ActivityScope
     WeatherArrayAdapter provideWeatherArrayAdapter() {
         return new WeatherArrayAdapter(activity, new ArrayList<>());
+    }
+
+    @Provides
+    @ActivityScope
+    WeatherDetailsAdapter provideWeatherDetailsAdapter() {
+        return new WeatherDetailsAdapter(activity, new ArrayList<>());
     }
 
 }
