@@ -23,6 +23,7 @@ public interface ApplicationComponent {
         static public ApplicationComponent init(WeatherApplication weatherApplication) {
             return DaggerApplicationComponent.builder()
                     .applicationModule(new ApplicationModule(weatherApplication))
+                    .apiModule(new ApiModule())
                     .build();
         }
     }
