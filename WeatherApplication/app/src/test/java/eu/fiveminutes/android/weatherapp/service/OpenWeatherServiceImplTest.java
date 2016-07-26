@@ -2,6 +2,8 @@ package eu.fiveminutes.android.weatherapp.service;
 
 import org.junit.Test;
 
+import javax.inject.Inject;
+
 import eu.fiveminutes.android.weatherapp.model.WeatherResponse;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -14,11 +16,13 @@ public class OpenWeatherServiceImplTest {
 
     private static final double DELTA = 0.001;
 
+    @Inject
+    OpenWeatherService openWeatherService;
+
     @Test
     public void testGetWeatherRetrofit() throws Exception {
 
         // test depends on network connection and changing weather
-        final OpenWeatherService openWeatherService = new OpenWeatherServiceImpl();
         openWeatherService.getWeatherForCity("Zagreb", new CallbackImplTest());
 
         // wait for async task

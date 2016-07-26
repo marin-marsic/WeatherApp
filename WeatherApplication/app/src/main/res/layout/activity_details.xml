@@ -3,17 +3,21 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
     tools:context=".view.WeatherDetailsActivity">
 
 
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/header_container"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/header_height"
+        android:background="@drawable/header_sky"
+        tools:context=".view.WeatherDetailsActivity">
     <TextView
         android:id="@+id/header"
         android:layout_width="fill_parent"
         android:layout_height="@dimen/header_height"
         android:gravity="center_vertical"
-        android:background="@color/header"
         android:textColor="@color/header_font"
         android:textSize="@dimen/header_font_size"
         android:layout_toRightOf="@+id/icon" />
@@ -22,14 +26,15 @@
         android:id="@+id/icon"
         android:layout_width="@dimen/icon_width"
         android:layout_height="@dimen/header_height"
-        android:background="@color/header"
         android:layout_alignParentTop="true" />
+
+    </RelativeLayout>
 
     <TextView
         android:id="@+id/shortDescription"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/header"
+        android:layout_below="@+id/header_container"
         android:paddingTop="@dimen/activity_vertical_margin"
         android:paddingLeft="@dimen/activity_horizontal_margin"
         android:textSize="@dimen/default_font_size"
